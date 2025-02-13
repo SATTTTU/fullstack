@@ -1,0 +1,31 @@
+import express from 'express';
+import morgan from 'morgan';
+import dotenv from 'dotenv';
+import connectDB from './config/db.js'; // Make sure this path is correct
+import authRoutes from './routes/authRoute.js'
+import cors from 'cors'
+import categoryRoutes from './routes/categoryRoutes.js';
+import productRoute from './routes/productRoute.js';
+dotenv.config(); // Load environment variables from .env file
+
+const app = express();
+app.use(cors())
+app.use(morgan('dev'));
+app.use(express.json());
+app.use('/api/v1/auth',authRoutes);
+app.use('/api/v1/category',categoryRoutes);
+app.use('/api/v1/product',productRoute);
+
+connectDB(); // Connect to the database
+
+app.get('/', (req, res) => {
+    res.send({
+        message: "Hello world"
+    });
+});
+
+const PORT = process.env.PORT || 3000; // Use a default port if not specified in environment variables
+
+app.listen(PORT, () => {
+    console.log(`Server running in ${process.env.DEV_MODE} mode on port ${PORT}`);
+});
