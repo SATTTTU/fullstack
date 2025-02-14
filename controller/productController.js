@@ -51,7 +51,6 @@ import formidable from "formidable";
 
 
 
-// ✅ Get All Products
 export const productController = async (req, res) => {
     try {
         const products = await productModel

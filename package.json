@@ -2,15 +2,14 @@
   "name": "back",
   "version": "1.0.0",
   "description": "",
-  "main": "index.js",
+  "main": "server.js",
   "type": "module",
- "scripts": {
-   "start": "react-scripts start",
-  "server": "nodemon server.js",
-  "client": "npm start --prefix project12",
-  "dev": "concurrently \"npm run server\" \"npm run client\""
-}
-,
+  "scripts": {
+    "start": "node server.js",
+    "server": "nodemon server.js",
+    "client": "npm run dev --prefix project12",
+    "dev": "concurrently \"npm run server\" \"npm run client\""
+  },
   "keywords": [],
   "author": "",
   "license": "ISC",
@@ -26,6 +25,7 @@
     "mongoose": "^8.8.4",
     "morgan": "^1.10.0",
     "nodemon": "^3.1.7",
+    "safe-buffer": "^5.2.1",
     "slugify": "^1.6.6"
   }
 }
