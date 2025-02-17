@@ -9,15 +9,12 @@ const productSchema = new mongoose.Schema(
     category: { type: mongoose.Schema.Types.ObjectId, ref: "Category", required: true },
     quantity: { type: Number, required: true },
     photo: {
-      data: Buffer,
-      contentType: {
-          type: String,
-          required: true // Ensure contentType is always present
-      }
-  }, // Corrected photo field structure
-    shipping: { type: Boolean, default: false } // Used `default: false` instead of `required: false`
+      data: String,
+      contentType: String
+  }, 
+    shipping: { type: Boolean, default: false } 
   },
-  { timestamps: true } // ✅ Correct placement of timestamps
+  { timestamps: true }
 );
 
 export default mongoose.model("Product", productSchema);

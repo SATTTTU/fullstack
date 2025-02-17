@@ -6,9 +6,23 @@ import authRoutes from './routes/authRoute.js'
 import cors from 'cors'
 import categoryRoutes from './routes/categoryRoutes.js';
 import productRoute from './routes/productRoute.js';
-dotenv.config(); // Load environment variables from .env file
+import path from 'path';
+import { fileURLToPath } from "url";
+import fs from 'fs';
+
+// ✅ Define __dirname for ES Modules
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
+if (!fs.existsSync(__dirname)) {
+    fs.mkdirSync(__dirname, { recursive: true });
+    console.log('Uploads directory created');
+}
 
 const app = express();
+app.use("/uploads", express.static(path.join(__dirname, "uploads")));
+
+dotenv.config(); // Load environment variables from .env file
+
 app.use(cors())
 app.use(morgan('dev'));
 app.use(express.json());

@@ -1,12 +1,10 @@
 import express from "express";
 import { isAdmin, requireSignIn } from "../middlewares/authMiddleware.js";
-import {  createProductController, deleteProductController, productController, productPhotoController, singleProductController, updateProductController } from "../controller/productController.js";
-import formidableMiddleware from "express-formidable"; // Corrected import
+import { createProductController, deleteProductController, productController, productPhotoController, singleProductController, updateProductController, upload } from "../controller/productController.js";
 const router = express.Router();
-router.use(formidableMiddleware());
 
 // Routes
-router.post("/createproduct", requireSignIn, isAdmin, createProductController); 
+router.post("/createproduct", upload.single("photo"), createProductController);
 router.get("/getproduct",productController);
 router.get("/getsingleproduct/:slug",singleProductController);
 router.get("/getproductphoto/:pid",productPhotoController);
